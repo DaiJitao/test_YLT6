@@ -4,7 +4,7 @@
     <file url="file://$PROJECT_DIR$/src/dai/core/compute/IntersectionTwoNodes.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/core/compute/NodeTest.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/core/compute/ReadWriteExcelFile.java" charset="GB2312" />
-    <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/MainApp.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/MainApp.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/ReadExcel.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/WriteExcel.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/WriteExcel_Navigator.java" charset="GB2312" />

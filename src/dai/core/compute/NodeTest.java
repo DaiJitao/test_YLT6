@@ -30,7 +30,7 @@ public class NodeTest {
 	private NodeTest() {
 	}
 
-	static String path = "D:\\temp\\2016.xlsx"; // 路径,指定文件路径.源文件
+	static String path = "D:\\temp\\2010.xlsx"; // 路径,指定文件路径.源文件
 															// nlp-words-new.xlsx
 															// test_index.xlsx
 	IntersectionTwoNodes intersectionTwoNodes = new IntersectionTwoNodes();
