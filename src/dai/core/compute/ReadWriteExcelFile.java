@@ -39,13 +39,7 @@ public class ReadWriteExcelFile {
 		}
 		return sheet;
 	}
-	//ªÒ»°sheet
-	private static XSSFSheet getSheet(String path,int index) throws Exception{
-		InputStream excelFile = new FileInputStream(path);
-		XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
-		return workbook.getSheetAt(index);
-	}
-	
+
 	public static void readXLSXFile(String path) throws Exception{
 		InputStream excelFile = new FileInputStream(path);
 		XSSFWorkbook workbook = new XSSFWorkbook(excelFile);

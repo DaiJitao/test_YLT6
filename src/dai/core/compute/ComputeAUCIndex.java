@@ -2,35 +2,53 @@ package dai.core.compute;
 
 import dai.excel.write.read.MainApp;
 
+import java.util.HashMap;
 import java.util.Random;
+
 
 /**
  *  不要计算的指标 负数指标
  */
 public class ComputeAUCIndex {
     public static void main(String[] args) {
-        int[] array = getRandonArray();
-        System.out.println(array[89]);
+
+
+    }
+    private static Random random = new Random();
+    //返回 [n,m]之间的随机数
+    public static int getRandomInt(int min, int max)
+    {
+        int out = max + 1;
+        int temp = random.nextInt(out - min); // [0, out - min -1]
+        int result = temp + min;
+        return result;
     }
 
-
-    public static int[] getRandonArray() {
-        Random random = new Random();
+    //随机选择90个cell
+    public int[] getRandonArray() {
         int[] randomArr = new int[90];
-        for (int i = 0; i <90; i++) {
-            int temp = random.nextInt(48);// [0,48)
-            randomArr[i] = temp + 1;
+        for (int i = 0; i < 90; i++) {
+            int temp = getRandomInt(1,889);// [1,889]
+            randomArr[i] = temp;
         }
         return randomArr;
     }
 
-    // 1. 随机选择单元格 让他们为0
-    public void test()
+    // 1. 随机选择单元格
+    // 1.2.让他们为0, 进行数据的零化处理
+    public void zeroCellIndex()
     {
-        for (int i = 0; i < 100; i++) {
-            int cellNumber = 180;
-            int dui = 90;
+        ReadIndexToCell toCell = new ReadIndexToCell();
+        int[] randomIndex = getRandonArray();
+        HashMap<Integer, String> hashMap = toCell.getIndexAndCell();
+
+        for (int i = 0; i < 90; i++) {
+            int key = randomIndex[i];
+            int[] cellIndex = toCell.getCellIndex(key, hashMap);
+
+
         }
+
     }
 
     // 2. 在此利用零化数据再次计算一遍概率，肯定比原来多余90行
