@@ -9,6 +9,8 @@
     <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/WriteExcel.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/excel/write/read/WriteExcel_Navigator.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/dai/test/txt/ReadTXT.java" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/dai/write/read/txt/Write.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/test/com/feng/ReadExcelForBaoBao.java" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/tingting/add/indicator/Compute_index.java" charset="GB2312" />
   </component>
 </project>

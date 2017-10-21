@@ -2,15 +2,7 @@ package dai.compute.run;
 
 import dai.excel.write.read.MainApp;
 
-public class MultiThreads_Two_Indictors1 implements Runnable{
-	public static void main(String[] args) {
-		Thread thread = new Thread(new MultiThreads_Two_Indictors1());
-		thread.start();
-	}
-	public MainApp test = new MainApp();
-	@Override
-	public void run() {			
-		test.computeTop_3_index();
-	}
+public class MultiThreads_Two_Indictors1 {
+
 
 }

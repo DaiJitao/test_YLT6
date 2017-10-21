@@ -6,6 +6,7 @@ import java.util.Set;
 
 import dai.core.compute.IntersectionTwoNodes;
 import dai.core.compute.NodeTest;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 public class Compute_index {
 
@@ -18,15 +19,15 @@ public class Compute_index {
 		return compute_index;
 	}
 
-	NodeTest nodeTest = NodeTest.getInstance();// 获得nodeTest类
+	NodeTest nodeTest = new NodeTest(); // 获得nodeTest类
 	IntersectionTwoNodes intersectionTwoNodes = new IntersectionTwoNodes();
 
-	public double Jaccard_index(int nodeName1, int nodeName2) {
-		boolean temp = nodeTest.isNO_Concurrence(nodeName1, nodeName2);
+	public double Jaccard_index(int nodeName1, int nodeName2 , XSSFSheet sheet) {
+		boolean temp = nodeTest.isNO_Concurrence(nodeName1, nodeName2, sheet);
 		// System.out.println("Jaccard_index isNO_Concurrence : " + temp);
 		if (temp) {
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(nodeName1); // 获得nodeName1的所有邻居
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(nodeName2);
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(nodeName1, sheet); // 获得nodeName1的所有邻居
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(nodeName2, sheet);
 			// System.out.println("hashMap1" + hashMap1);
 			// System.out.println("hashMap2" + hashMap2);
 			HashMap<Double, Double> inner1 = hashMap1.get(nodeName1);// 获得所有邻居的信息
@@ -57,37 +58,37 @@ public class Compute_index {
 
 	}
 
-	public double WAA_index(int nodeName1, int nodeName2) {
-		return nodeTest.Sxy(nodeName1, nodeName2, "A");
+	public double WAA_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
+		return nodeTest.Sxy(nodeName1, nodeName2, "A", sheet);
 
 	}
 
-	public double WRA_index(int nodeName1, int nodeName2) {
-		return nodeTest.Sxy(nodeName1, nodeName2, "R");
+	public double WRA_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
+		return nodeTest.Sxy(nodeName1, nodeName2, "R", sheet);
 
 	}
 
-	public double WCN_index(int nodeName1, int nodeName2) {
-		return nodeTest.Sxy(nodeName1, nodeName2, "C");
+	public double WCN_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
+		return nodeTest.Sxy(nodeName1, nodeName2, "C", sheet);
 
 	}
 
-	public double rWAA_index(int nodeName1, int nodeName2) {
+	public double rWAA_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
 		int x = nodeName1;
 		int y = nodeName2;
 		if (x == y) {
 			System.out.println("S " + x + "和" + y + "是自己和自己连接");
 			return 0;
-		} else if (nodeTest.isNO_Concurrence(x, y)) {
+		} else if (nodeTest.isNO_Concurrence(x, y, sheet)) {
 			// 判断其邻居是否有交集，
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 
 			if (intersectionTwoNodes.isIntersection(hashMap1.get(x), hashMap2.get(y))) {
 				HashMap<Double, Double> hashMap_X = intersectionTwoNodes.getNode1MapData(); // 存储与X信息相关的共同邻居
 				HashMap<Double, Double> hashMap_Y = intersectionTwoNodes.getNode2MapData(); // 存储与Y信息相关的共同邻居
 				// System.out.println(hashMap_X);
-				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "A");
+				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "A", sheet);
 			} else {
 				return 0;
 			}
@@ -97,22 +98,22 @@ public class Compute_index {
 		}
 	}//
 
-	public double rWRA_index(int nodeName1, int nodeName2) {
+	public double rWRA_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
 		int x = nodeName1;
 		int y = nodeName2;
 		if (x == y) {
 			System.out.println("S " + x + "和" + y + "是自己和自己连接");
 			return 0;
-		} else if (nodeTest.isNO_Concurrence(x, y)) {
+		} else if (nodeTest.isNO_Concurrence(x, y, sheet)) {
 			// 判断其邻居是否有交集，
-			HashMap<Integer, HashMap<Double, Double>> hashMap = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+			HashMap<Integer, HashMap<Double, Double>> hashMap = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 
 			if (intersectionTwoNodes.isIntersection(hashMap.get(x), hashMap2.get(y))) {
 				HashMap<Double, Double> hashMap_X = intersectionTwoNodes.getNode1MapData(); // 存储与X信息相关的共同邻居
 				HashMap<Double, Double> hashMap_Y = intersectionTwoNodes.getNode2MapData(); // 存储与Y信息相关的共同邻居
 				// System.out.println(hashMap_X);
-				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "R");
+				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "R", sheet);
 			} else {
 				return 0;
 			}
@@ -123,22 +124,22 @@ public class Compute_index {
 		}
 	}// end
 
-	public double rWCN_index(int nodeName1, int nodeName2) {
+	public double rWCN_index(int nodeName1, int nodeName2, XSSFSheet sheet) {
 		int x = nodeName1;
 		int y = nodeName2;
 		if (x == y) {
 			System.out.println("S " + x + "和" + y + "是自己和自己连接");
 			return 0;
-		} else if (nodeTest.isNO_Concurrence(x, y)) {
+		} else if (nodeTest.isNO_Concurrence(x, y, sheet)) {
 			// 判断其邻居是否有交集，
-			HashMap<Integer, HashMap<Double, Double>> hashMap = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+			HashMap<Integer, HashMap<Double, Double>> hashMap = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 
 			if (intersectionTwoNodes.isIntersection(hashMap.get(x), hashMap2.get(y))) {
 				HashMap<Double, Double> hashMap_X = intersectionTwoNodes.getNode1MapData(); // 存储与X信息相关的共同邻居
 				HashMap<Double, Double> hashMap_Y = intersectionTwoNodes.getNode2MapData(); // 存储与Y信息相关的共同邻居
 				// System.out.println(hashMap_X);
-				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "C");
+				return nodeTest.r_Weight(hashMap_X, hashMap_Y, x, y, "C", sheet);
 
 			} else {
 
@@ -151,8 +152,8 @@ public class Compute_index {
 	}
 
 	//
-	public double Salton_index(int x, int y) {
-		int nums[] = get_Con_nums(x, y);
+	public double Salton_index(int x, int y, XSSFSheet sheet) {
+		int nums[] = get_Con_nums(x, y, sheet);
 		int len = nums.length;
 		if (len == 1) {
 			return -1;
@@ -161,8 +162,8 @@ public class Compute_index {
 		}
 	}
 
-	public double LHNI_index(int x, int y) {
-		int nums[] = get_Con_nums(x, y);
+	public double LHNI_index(int x, int y, XSSFSheet sheet) {
+		int nums[] = get_Con_nums(x, y, sheet);
 		int len = nums.length;
 		if (len == 1) {
 			return -1;
@@ -172,11 +173,11 @@ public class Compute_index {
 	}
 
 	//
-	public double SΦrenson(int x, int y) {
+	public double SΦrenson(int x, int y, XSSFSheet sheet) {
 		// System.out.println(nodeTest.isNO_Concurrence(x, y));
-		if (nodeTest.isNO_Concurrence(x, y)) {
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+		if (nodeTest.isNO_Concurrence(x, y, sheet)) {
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 			HashMap<Double, Double> innerhashMap1 = hashMap1.get(x);
 			HashMap<Double, Double> innerhashMap2 = hashMap2.get(y);
 
@@ -195,8 +196,8 @@ public class Compute_index {
 		}
 	}
 
-	public double greater_nodePre_index(int x, int y) {
-		int nums[] = get_Con_nums(x, y);
+	public double greater_nodePre_index(int x, int y, XSSFSheet sheet) {
+		int nums[] = get_Con_nums(x, y, sheet);
 		int len = nums.length;
 		if (len == 1) {
 			return -1;
@@ -210,8 +211,8 @@ public class Compute_index {
 		}
 	}// end
 
-	public double CN_index(int x, int y) {
-		int nums[] = get_Con_nums(x, y);
+	public double CN_index(int x, int y, XSSFSheet sheet) {
+		int nums[] = get_Con_nums(x, y, sheet);
 		int len = nums.length;
 		if (len == 1) {
 			return 0;
@@ -222,8 +223,8 @@ public class Compute_index {
 	}// end
 		// 存疑
 
-	public double greater_nodeBad_index(int x, int y) {
-		int nums[] = get_Con_nums(x, y);
+	public double greater_nodeBad_index(int x, int y, XSSFSheet sheet) {
+		int nums[] = get_Con_nums(x, y, sheet);
 		int len = nums.length;
 		if (len == 1) {
 			return -1;
@@ -237,11 +238,11 @@ public class Compute_index {
 		}
 	}
 
-	public double AA_index(int x, int y) {
+	public double AA_index(int x, int y, XSSFSheet sheet) {
 
-		if (nodeTest.isNO_Concurrence(x, y)) {
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+		if (nodeTest.isNO_Concurrence(x, y, sheet)) {
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 			HashMap<Double, Double> innerhashMap1 = hashMap1.get(x);
 			HashMap<Double, Double> innerhashMap2 = hashMap2.get(y);
 
@@ -253,7 +254,7 @@ public class Compute_index {
 				while (keysIterator.hasNext()) {
 					double p = keysIterator.next();
 					int key = (int) p;
-					int nums = nodeTest.AllNeighbors(key).get(key).size();
+					int nums = nodeTest.AllNeighbors(key, sheet).get(key).size();
 					if (nums != 0) {
 						SUMxy += 1 / intersectionTwoNodes.log2(nums);
 					} else {
@@ -272,10 +273,10 @@ public class Compute_index {
 	}
 
 	//
-	public double RA_index(int x, int y) {
-		if (nodeTest.isNO_Concurrence(x, y)) {
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+	public double RA_index(int x, int y, XSSFSheet sheet) {
+		if (nodeTest.isNO_Concurrence(x, y, sheet)) {
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 			HashMap<Double, Double> innerhashMap1 = hashMap1.get(x);
 			HashMap<Double, Double> innerhashMap2 = hashMap2.get(y);
 
@@ -287,7 +288,7 @@ public class Compute_index {
 				while (keysIterator.hasNext()) {
 					double p = keysIterator.next();
 					int key = (int) p;
-					int nums = nodeTest.AllNeighbors(key).get(key).size();
+					int nums = nodeTest.AllNeighbors(key, sheet).get(key).size();
 					if (nums != 0) {
 						SUMxy += 1.0 / nums;
 					} else {
@@ -305,12 +306,12 @@ public class Compute_index {
 	}
 
 	// 面向切面编程，只对分子进行处理
-	int[] get_Con_nums(int x, int y) {
+	int[] get_Con_nums(int x, int y, XSSFSheet sheet) {
 		int[] temp;
-		if (nodeTest.isNO_Concurrence(x, y))
+		if (nodeTest.isNO_Concurrence(x, y ,sheet))
 		{
-			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x);
-			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y);
+			HashMap<Integer, HashMap<Double, Double>> hashMap1 = nodeTest.AllNeighbors(x, sheet);
+			HashMap<Integer, HashMap<Double, Double>> hashMap2 = nodeTest.AllNeighbors(y, sheet);
 			HashMap<Double, Double> innerhashMap1 = hashMap1.get(x);
 			int x_nums = innerhashMap1.size();
 			HashMap<Double, Double> innerhashMap2 = hashMap2.get(y);

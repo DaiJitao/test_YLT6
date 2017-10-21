@@ -14,11 +14,11 @@ public class Test_Compute_index {
 //		 print("RA_index", compute_index.RA_index(x, y));
 //		
 //		 print("rWAA_index", compute_index.rWAA_index(x, y));
-		 print("rWCN_index", compute_index.rWCN_index(x, y));
+		 //print("rWCN_index", compute_index.rWCN_index(x, y));
 //		 print("rWRA_index", compute_index.rWRA_index(x, y));
 //		
 //		 print("Salton_index", compute_index.Salton_index(x, y));
-//		 print("S¦µrenson", compute_index.S¦µrenson(x, y));
+//		 print("Sï¿½ï¿½renson", compute_index.Sï¿½ï¿½renson(x, y));
 //		 print("WAA_index", compute_index.WAA_index(3, 12));
 //		
 //		 print("WCN_index", compute_index.WCN_index(3, 12));

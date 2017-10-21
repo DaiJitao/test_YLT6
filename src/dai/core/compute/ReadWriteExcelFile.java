@@ -12,8 +12,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadWriteExcelFile {
-	private static XSSFSheet sheet = null;
-	private ReadWriteExcelFile(){
+
+
+	public ReadWriteExcelFile(){
 		
 	}
 
@@ -23,7 +24,10 @@ public class ReadWriteExcelFile {
 	 * @param path
 	 * @return
 	 */
-	public static XSSFSheet getSheet(String path){
+	public XSSFSheet getSheet(String path)
+	{
+        XSSFSheet sheet = null;
+		System.out.println("ªÒ»°sheet");
 		if (sheet == null){
 			//String path = "D:\\temp\\test600.xlsx";
 			InputStream excelFile;
@@ -31,8 +35,8 @@ public class ReadWriteExcelFile {
 			try {
 				excelFile = new FileInputStream(path);
 				workbook = new XSSFWorkbook(excelFile);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e)
+            {
 				e.printStackTrace();
 			}			
 			sheet = workbook.getSheetAt(0);			

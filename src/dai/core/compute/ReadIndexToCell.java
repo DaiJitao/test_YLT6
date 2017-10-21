@@ -27,7 +27,8 @@ public class ReadIndexToCell {
 
     HashMap<Integer, String> getIndexAndCell()
     {
-        XSSFSheet sheet = ReadWriteExcelFile.getSheet(_path);
+        ReadWriteExcelFile readWriteExcelFile = new ReadWriteExcelFile();
+        XSSFSheet sheet = readWriteExcelFile.getSheet(_path);
         XSSFRow row = null; //ReadWriteExcelFile.readRow(sheet, 0);
         Iterator rows = sheet.iterator();
         HashMap<Integer, String> hashMap = new HashMap<>();

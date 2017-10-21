@@ -18,7 +18,7 @@ import dai.test.txt.WriteDataOnTXT;
  */
 
 public class ReadExcel {
-	public static void main(String[] args) throws Exception{
+	public static void main1(String[] args) throws Exception{
 		String path = "D:\\temp\\feng2.0\\2013spa_rawdata.xlsx";
 		String pathComA = "D:\\temp\\feng2.0\\comA.txt";
 		String pathComB = "D:\\temp\\feng2.0\\comB.txt";
